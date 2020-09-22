@@ -155,8 +155,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 548.4, y: -249.8}
-  m_SizeDelta: {x: 508.21704, y: 396.20517}
+  m_AnchoredPosition: {x: 548.4, y: -250.55002}
+  m_SizeDelta: {x: 508.21704, y: 397.70523}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &36174659
 MonoBehaviour:
@@ -725,8 +725,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -531.2, y: -246.8}
-  m_SizeDelta: {x: 538.7262, y: 396.20517}
+  m_AnchoredPosition: {x: -531.2, y: -249.05}
+  m_SizeDelta: {x: 538.7262, y: 400.70517}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &988187683
 MonoBehaviour:
@@ -1003,7 +1003,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Press the button to generate a topic!
+  m_Text: Daily Topic will Appear here
 --- !u!222 &1280528898
 CanvasRenderer:
   m_ObjectHideFlags: 0
