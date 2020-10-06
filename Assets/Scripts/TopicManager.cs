@@ -22,37 +22,46 @@ public class TopicManager : MonoBehaviour
     [SerializeField] Button ComboButton;
     [SerializeField] Button LearningButton;
     // output text
-    [SerializeField] Text RandomText;
+    [SerializeField] Text[] RandomText;
     [SerializeField] string lastRandText;
+    [SerializeField] Animator spinWheel;
     [SerializeField] Text ComboText;
-    [SerializeField] Text LearningText;
     [SerializeField] Text DailyTopicText;
     // get the day of the year out of 366
     int iDayOfYear = System.DateTime.UtcNow.DayOfYear;
+    // what modes are using?
+    [SerializeField] protected bool usingRandom;
+    [SerializeField] protected bool usingCombo;
+    [SerializeField] protected bool usingDaily;
 
     // Start is called before the first frame update
     void Start()
     {
         // assign our buttton listeners
-        RandomButton.onClick.AddListener(RandomTopicGen);
-        ComboButton.onClick.AddListener(ComboTopicGen);
-        LearningButton.onClick.AddListener(LearningTopicGen);
-        DailyTopicText.text = "Today's Topic is topic " + iDayOfYear;
+        if (usingRandom == true) { RandomButton.onClick.AddListener(RandomTopicGen); }
+        if (usingCombo == true) { ComboButton.onClick.AddListener(ComboTopicGen); }
+        if (usingDaily == true) { DailyTopicText.text = "Today's Topic is topic " + iDayOfYear; }
     }
 
     // random topic selection
     void RandomTopicGen()
     {
-        string i = RandomTopics[Random.Range(0, RandomTopics.Length)];
-
-        if (i == lastRandText)
+        // for every side of our spinning wheel, choose random text
+        foreach (Text text in RandomText)
         {
-            i = RandomTopics[Random.Range(0, RandomTopics.Length)];
+            string i = RandomTopics[Random.Range(0, RandomTopics.Length)];
+
+            if (i == lastRandText)
+            {
+                i = RandomTopics[Random.Range(0, RandomTopics.Length)];
+            }
+
+            lastRandText = i;
+
+            text.text = i;
         }
 
-        lastRandText = i;
-
-        RandomText.text = "Draw a " + i + "!";
+        spinWheel.Play("Spinwheel Spin");
     }
 
     // multiple topic selection
@@ -70,11 +79,5 @@ public class TopicManager : MonoBehaviour
         {
             ComboText.text = "Draw a " + i + " and a " + x + "!";
         }
-    }
-
-    // learning topic selection
-    void LearningTopicGen()
-    {
-
     }
 }
