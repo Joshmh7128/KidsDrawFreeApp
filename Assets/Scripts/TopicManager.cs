@@ -11,73 +11,102 @@ public class TopicManager : MonoBehaviour
     /// In the future, it will also choose a daily topic
 
     // topics
-    [SerializeField] string[] RandomTopics = { "alligator", "ant", "bear", "bee", "bird", "camel", "cat", "cheetah", "chicken", "chimpanzee", "cow",
-        "crocodile", "deer", "dog", "dolphin", "duck", "eagle", "elephant", "fish", "fly", "fox", "frog", "giraffe", "goat", "goldfish", "hamster",
-        "hippopotamus", "horse", "kangaroo", "kitten", "lion", "lobster", "monkey", "octopus", "owl", "panda", "pig", "puppy", "rabbit", "rat",
-        "scorpion", "seal", "shark", "sheep", "snail", "snake", "spider", "squirrel", "tiger", "turtle", "wolf", "zebra", "Van", "Taxi", "Police car", "Bus",
-        "Ambulance", "Skateboard", "Baby carriage", "Bicycle", "Mountain bike", "Scooter", "Motorcycle", "Fire engine", "Crane", "Forklift", "Tractor",
-        "Recycling truck", "Cement mixer", "Dump truck", "Subway", "Helicopter", "Airplane", "Balloon", "Train", "Carriage", "Rowboat", "Boat", "Train", };
+    [SerializeField] string[] CategoriesList = { "Nature", "Animals", "Vehicles", "Food", "Activities" };
+    [SerializeField] string[] ColorsList = { "Red", "Orange", "Yellow", "Green", "Blue", "Purple" };
+    [SerializeField] string[] NatureNouns = { "PlaceHolderTopic1", "PlaceHolderTopic2", "PlaceHolderTopic3", "PlaceHolderTopic4", "PlaceHolderTopic5" };
+    [SerializeField] string[] AnimalsNouns = { "PlaceHolderTopic1", "PlaceHolderTopic2", "PlaceHolderTopic3", "PlaceHolderTopic4", "PlaceHolderTopic5" };
+    [SerializeField] string[] VehiclesNouns = { "PlaceHolderTopic1", "PlaceHolderTopic2", "PlaceHolderTopic3", "PlaceHolderTopic4", "PlaceHolderTopic5" };
+    [SerializeField] string[] FoodNouns = { "PlaceHolderTopic1", "PlaceHolderTopic2", "PlaceHolderTopic3", "PlaceHolderTopic4", "PlaceHolderTopic5" };
+    [SerializeField] string[] ActivitiesNouns = { "PlaceHolderTopic1", "PlaceHolderTopic2", "PlaceHolderTopic3", "PlaceHolderTopic4", "PlaceHolderTopic5" };
+
     // buttons
-    [SerializeField] Button RandomButton;
-    [SerializeField] Button ComboButton;
-    [SerializeField] Button LearningButton;
-    // output text
-    [SerializeField] Text[] RandomText;
-    [SerializeField] string lastRandText;
+    [SerializeField] Button CategoryButton;
+    [SerializeField] Button ColorAndNounButton;
+
+    // output text   
+    [SerializeField] Text[] CategoryText; // categories on the wheel
+    [SerializeField] Text[] ColorText; // colors on the wheel
+    [SerializeField] Text[] NounText; // nouns on the wheel
+    [SerializeField] Text CategoryChoice; // which color did the wheel land on?
+    [SerializeField] Text ColorChoice; // which color did the wheel land on?
+    [SerializeField] Text NounChoice; // which noun did the wheel land on?
+
+    // spinner animator
     [SerializeField] Animator spinWheel;
-    [SerializeField] Text ComboText;
-    [SerializeField] Text DailyTopicText;
-    // get the day of the year out of 366
-    int iDayOfYear = System.DateTime.UtcNow.DayOfYear;
-    // what modes are using?
-    [SerializeField] protected bool usingRandom;
-    [SerializeField] protected bool usingCombo;
-    [SerializeField] protected bool usingDaily;
 
     // Start is called before the first frame update
     void Start()
     {
-        // assign our buttton listeners
-        if (usingRandom == true) { RandomButton.onClick.AddListener(RandomTopicGen); }
-        if (usingCombo == true) { ComboButton.onClick.AddListener(ComboTopicGen); }
-        if (usingDaily == true) { DailyTopicText.text = "Today's Topic is topic " + iDayOfYear; }
+        
     }
 
-    // random topic selection
-    void RandomTopicGen()
+    // random category
+    public void ChooseCategory()
     {
-        // for every side of our spinning wheel, choose random text
-        foreach (Text text in RandomText)
+        // choose them on the wheel
+        foreach (Text text in CategoryText)
         {
-            string i = RandomTopics[Random.Range(0, RandomTopics.Length)];
-
-            if (i == lastRandText)
-            {
-                i = RandomTopics[Random.Range(0, RandomTopics.Length)];
-            }
-
-            lastRandText = i;
-
-            text.text = i;
+            text.text = CategoriesList[Random.Range(0,CategoriesList.Length)];
         }
 
-        spinWheel.Play("Spinwheel Spin");
+        // choose our category
+        CategoryChoice.text = CategoryText[0].text;
     }
 
-    // multiple topic selection
-    void ComboTopicGen()
+    // random color
+    public void ChooseColor()
     {
-        string i = RandomTopics[Random.Range(0, RandomTopics.Length)];
-        string x = RandomTopics[Random.Range(0, RandomTopics.Length)];
-
-        while (x == i)
+        // choose wheel options
+        foreach (Text text in ColorText)
         {
-            x = RandomTopics[Random.Range(0, RandomTopics.Length)];
+            text.text = ColorsList[Random.Range(0, ColorsList.Length)];
         }
 
-        if (x != i)
-        {
-            ComboText.text = "Draw a " + i + " and a " + x + "!";
+        // choose our color
+        ColorChoice.text = ColorText[0].text;
+    }
+
+    // random noun
+    public void ChooseNoun()
+    {
+        // set our category
+        string category;
+        category = CategoryChoice.text;
+
+        if (category == "Nature")
+        {   // choose our wheel options
+            foreach (Text text in NounText)
+            { text.text = NatureNouns[Random.Range(0,NatureNouns.Length)]; }
+            NounChoice.text = NounText[0].text;
         }
+
+        if (category == "Animals")
+        {   // choose our wheel options
+            foreach (Text text in NounText)
+            { text.text = AnimalsNouns[Random.Range(0, AnimalsNouns.Length)]; }
+            NounChoice.text = NounText[0].text;
+        }
+
+        if (category == "Vehicles")
+        {   // choose our wheel options
+            foreach (Text text in NounText)
+            { text.text = VehiclesNouns[Random.Range(0, VehiclesNouns.Length)]; }
+            NounChoice.text = NounText[0].text;
+        }
+
+        if (category == "Food")
+        {   // choose our wheel options
+            foreach (Text text in NounText)
+            { text.text = FoodNouns[Random.Range(0, FoodNouns.Length)]; }
+            NounChoice.text = NounText[0].text;
+        }
+
+        if (category == "Activities")
+        {   // choose our wheel options
+            foreach (Text text in NounText)
+            { text.text = ActivitiesNouns[Random.Range(0, ActivitiesNouns.Length)]; }
+            NounChoice.text = NounText[0].text;
+        }
+
     }
 }
