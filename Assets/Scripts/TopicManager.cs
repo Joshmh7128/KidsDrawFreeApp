@@ -31,8 +31,10 @@ public class TopicManager : MonoBehaviour
     [SerializeField] Text ColorChoice; // which color did the wheel land on?
     [SerializeField] Text NounChoice; // which noun did the wheel land on?
 
-    // spinner animator
-    [SerializeField] Animator spinWheel;
+    // spinner animators
+    [SerializeField] Animator spinWheelCat;
+    [SerializeField] Animator spinWheelColor;
+    [SerializeField] Animator spinWheelNoun;
 
     // Start is called before the first frame update
     void Start()
@@ -51,6 +53,9 @@ public class TopicManager : MonoBehaviour
 
         // choose our category
         CategoryChoice.text = CategoryText[0].text;
+        spinWheelCat.Play("Spinwheel Spin");
+        spinWheelColor.Play("Spinwheel Spin");
+        spinWheelNoun.Play("Spinwheel Spin");
     }
 
     // random color
