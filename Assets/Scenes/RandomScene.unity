@@ -368,7 +368,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 81814469}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.86, y: -2.95, z: 78.5346}
+  m_LocalPosition: {x: -6.9180765, y: -2.9307787, z: 78.5346}
   m_LocalScale: {x: 2.0392427, y: 2.0392427, z: 2.0392427}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1562,6 +1562,7 @@ GameObject:
   - component: {fileID: 598032175}
   - component: {fileID: 598032178}
   - component: {fileID: 598032177}
+  - component: {fileID: 598032180}
   - component: {fileID: 598032176}
   - component: {fileID: 598032179}
   m_Layer: 5
@@ -1588,7 +1589,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 308.7, y: -171.7}
+  m_AnchoredPosition: {x: 314.7, y: -171.7}
   m_SizeDelta: {x: 377, y: 235}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &598032176
@@ -1683,6 +1684,18 @@ CanvasRenderer:
   m_GameObject: {fileID: 598032174}
   m_CullTransparentMesh: 0
 --- !u!114 &598032179
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 598032174}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b52835309ad6ba44b294f7c99525f81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &598032180
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1915,7 +1928,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Draw & Print this topic!
+  m_Text: Click here to Download free Printer Frames!
 --- !u!222 &812616362
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3721,7 +3734,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -262.16388, y: -206.16537}
+  m_AnchoredPosition: {x: -309.8, y: -205.3}
   m_SizeDelta: {x: 307.2837, y: 60.106415}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1811251485
