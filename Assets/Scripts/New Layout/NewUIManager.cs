@@ -24,11 +24,11 @@ public class NewUIManager : MonoBehaviour
     [SerializeField] Button greenFaceButton;    // choose associated partner
     [SerializeField] Button orangeFaceButton;   // choose associated partner
     // tracking
-    public GameObject currentPartner; // what is our active partner? change this game object whenever we change partners
-    [SerializeField] GameObject bluePartner;    // partner prefab
-    [SerializeField] GameObject greenPartner;   // partner prefab
-    [SerializeField] GameObject yellowPartner;  // partner prefab
-    [SerializeField] GameObject orangePartner;  // partner prefab
+    public Sprite currentPartner; // what is our active partner? change this game object whenever we change partners
+    [SerializeField] Sprite bluePartner;    // partner Sprite
+    [SerializeField] Sprite greenPartner;   // partner Sprite
+    [SerializeField] Sprite yellowPartner;  // partner Sprite
+    [SerializeField] Sprite orangePartner;  // partner Sprite
 
     // start runs when the object is activated
     private void Start()
@@ -38,7 +38,7 @@ public class NewUIManager : MonoBehaviour
     }
 
     // character selection function
-    private void CharacterSelection(int characterChoice)
+    public void CharacterSelection(int characterChoice)
     {
         // int characterChoice determines which character we've selected
         switch (characterChoice)
