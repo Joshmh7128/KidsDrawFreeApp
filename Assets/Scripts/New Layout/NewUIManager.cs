@@ -222,7 +222,7 @@ public class NewUIManager : MonoBehaviour
     public void PopUpTrigger(bool MoveIn /*is the popup moving in or out?*/)
     {
         // change the popup text to the proper sentence
-        popupSentence.text = "LETS DRAW A " + activeVerbs[activeVerbs.Length - 1].text + " " + activeNouns[activeNouns.Length - 1].text;
+        popupSentence.text = "LET'S DRAW A " + activeVerbs[activeVerbs.Length - 1].text + " " + activeNouns[activeNouns.Length - 1].text;
         // animated based on state
         if (MoveIn == true)
         {
