@@ -34,6 +34,8 @@ public class NewUIManager : MonoBehaviour
     [SerializeField] Sprite yellowPartner;  // partner Sprite
     [SerializeField] Sprite orangePartner;  // partner Sprite
     [SerializeField] SpriteRenderer[] CharacterDisplays; // the list of character displays
+    [SerializeField] string ourCharacter;
+    [SerializeField] string ourCategory;
     // camera positions
     [SerializeField] Transform[] cameraPositions;   // the positions that our camera can move too and from
     [SerializeField] int cameraPos;                 // 0 to max of cameraPositions;
@@ -46,8 +48,9 @@ public class NewUIManager : MonoBehaviour
     [SerializeField] GameObject natureCatIcon; // icons to enable / disable for the generation screen
     [SerializeField] GameObject sportsCatIcon; // icons to enable / disable for the generation screen
     // spinner text tracking
-    [SerializeField] TextMeshPro[] activeVerbs;
-    [SerializeField] TextMeshPro[] activeNouns;
+    [SerializeField] TextMeshPro[] activeVerbs; // actual active verbs
+    [SerializeField] TextMeshPro[] activeNouns; // actual active nouns
+    [SerializeField] TextMeshPro popupSentence; // the sentence presented to the user as  "LETS DRAW A VERBING NOUN TOGETHER!"
     [SerializeField] readonly string[] verbs = { "DANCING", "JUMPING", "RUNNING", "FLYING", "SPINNING", "RELAXING", "EATING", "LAUGHING", "SINGING", "PAINTING", "CELEBRATING"};
     [SerializeField] readonly string[] vehicles = { "TRUCK", "CAR", "RACECAR", "BULLDOZER", "DUMPTRUCK", "CRANE", "CHERRYPICKER", "TRAIN", "PLANE", "BOAT", "HELICOPTER"};
     [SerializeField] readonly string[] animals = { "DOG", "CAT", "MOUSE", "MONKEY", "FROG", "LIZARD", "LION", "TIGER", "BEAR", "SNAKE", "BIRD"};
@@ -57,6 +60,7 @@ public class NewUIManager : MonoBehaviour
     // animations and animators
     [SerializeField] Animator verbWheel;
     [SerializeField] Animator nounWheel;
+    [SerializeField] Animator popupAnimator;
 
     // start runs when the object is activated
     private void Start()
@@ -79,15 +83,19 @@ public class NewUIManager : MonoBehaviour
                 break;
             case 1:
                 currentPartner = bluePartner;
+                ourCharacter = "sky";
                 break;
             case 2:
                 currentPartner = greenPartner;
+                ourCharacter = "jade";
                 break;
             case 3:
                 currentPartner = yellowPartner;
+                ourCharacter = "rose";
                 break;
             case 4:
                 currentPartner = orangePartner;
+                ourCharacter = "clay";
                 break;
         }
         // display change
@@ -120,6 +128,7 @@ public class NewUIManager : MonoBehaviour
     // category selection // 0 - null ; 1 - cars ; 2 - animals ; 3 - foods ; 4 - nature ; 5 - sports ;
     public void CategorySelection(int localCategoryChoice)
     {
+        // to avoid nothing showing up, default state is set to cars. null is implemented for testing purposes.
         // set our category choice
         categoryChoice = localCategoryChoice;
         // start by disabling all our icons
@@ -135,18 +144,23 @@ public class NewUIManager : MonoBehaviour
                 break;
             case 1:
                 carsCatIcon.SetActive(true);
+                ourCategory = "vehicles";
                 break;
             case 2:
                 animalsCatIcon.SetActive(true);
+                ourCategory = "animals";
                 break;
             case 3:
                 foodsCatIcon.SetActive(true);
+                ourCategory = "foods";
                 break;
             case 4:
                 natureCatIcon.SetActive(true);
+                ourCategory = "nature";
                 break;
             case 5:
                 sportsCatIcon.SetActive(true);
+                ourCategory = "sports";
                 break;
         }
 
@@ -202,5 +216,40 @@ public class NewUIManager : MonoBehaviour
     {
         // play anim
         nounWheel.Play("New Noun Vert Spinner");
+    }
+
+    // when user is satisfied with their selection present the popup
+    public void PopUpTrigger(bool MoveIn /*is the popup moving in or out?*/)
+    {
+        // change the popup text to the proper sentence
+        popupSentence.text = "LETS DRAW A " + activeVerbs[activeVerbs.Length - 1].text + " " + activeNouns[activeNouns.Length - 1].text;
+        // animated based on state
+        if (MoveIn == true)
+        {
+            // move the popup in
+            popupAnimator.Play("Popup Move In");
+        }
+
+        if (MoveIn == false)
+        {
+            // move the popup out
+            popupAnimator.Play("Popup Move Out");
+        }
+    }
+
+    public void OpenWebPage()
+    {
+        // format our verbs and nouns
+        string noun = activeNouns[activeNouns.Length - 1].text;
+        string verb = activeVerbs[activeVerbs.Length - 1].text;
+        // no spaces
+        noun = noun.Replace(" ", "-");
+        verb = verb.Replace(" ", "-");
+        // no capitals
+        noun = noun.ToLower();
+        verb = verb.ToLower();
+        // get the final string together for the printable page
+        string finalString = "http://kidsdrawfree.com/print/"+"?kid="+ourCharacter+"&noun="+ noun + "&verb="+ verb + "&category="+ourCategory+"&game=drawing-game";
+        Application.OpenURL(finalString);
     }
 }
